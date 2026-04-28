@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand: #F39800;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6E6E73;
+  --color-surface: #F5F5F7;
+  --color-bg: #FFFFFF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --color-brand: #F39800;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6E6E73;
+  --color-surface: #F5F5F7;
+  --color-bg: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #FFFFFF;
+  color: #1A1A1A;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 스크롤 진입 애니메이션 */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 화살표 링크 호버 */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s ease;
+}
+
+.arrow-link:hover {
+  gap: 10px;
+}
+
+/* 카드 호버 */
+.card-hover {
+  transition: transform 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
 }

@@ -6,9 +6,10 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "회사 소개", href: "/about" },
-  { label: "서비스", href: "#services" },
+  { label: "회사소개", href: "/about" },
+  { label: "서비스", href: "/services" },
   { label: "지점 안내", href: "#branches" },
+  { label: "뉴스레터", href: "/newsletter" },
   { label: "문의", href: "#contact" },
 ];
 

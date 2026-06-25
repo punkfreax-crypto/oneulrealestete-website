@@ -427,23 +427,22 @@ export default function AboutPage() {
                   style={{
                     width: "100%",
                     aspectRatio: "3/4",
-                    background: "#E5E5EA",
                     borderRadius: 12,
                     marginBottom: 24,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    overflow: "hidden",
                   }}
                 >
-                  <span
+                  <img
+                    src="/images/ceo-jeon-deokjae.jpg"
+                    alt="전덕재 대표"
                     style={{
-                      fontSize: 13,
-                      color: "#AEAEB2",
-                      letterSpacing: "-0.01em",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "top",
+                      display: "block",
                     }}
-                  >
-                    대표 사진
-                  </span>
+                  />
                 </div>
                 <p
                   style={{

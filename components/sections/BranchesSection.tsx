@@ -21,9 +21,9 @@ const branches = [
     soon: false,
   },
   {
-    name: "수원점",
+    name: "광교점",
     status: "준비 중",
-    address: "경기도 수원시 영통구\n(위치 확인 중)",
+    address: "경기도 수원시 영통구 광교\n(위치 확인 중)",
     phone: "—",
     hours: "—",
     soon: true,

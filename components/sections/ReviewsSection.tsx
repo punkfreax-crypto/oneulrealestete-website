@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 const reviews = [
   {
     quote:
-      "처음 집을 살 때 막막했는데, 처음부터 끝까지 함께해주셔서 불안감 없이 계약을 마칠 수 있었습니다. 법인이라 그런지 체계가 달라요.",
+      "처음 집을 살 때 막막했는데, 처음부터 끝까지 함께해주셔서 불안감 없이 계약을 마칠 수 있었습니다. 팀으로 꼼꼼하게 챙겨주셔서 든든했어요.",
     author: "30대 직장인 A씨",
     location: "도봉구 아파트 매수",
   },

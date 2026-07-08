@@ -74,9 +74,9 @@ export default function Footer() {
               </div>
               <div>
                 <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 4 }}>
-                  수원점 (준비 중)
+                  광교점
                 </p>
-                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>COMING SOON</p>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>2026년 9월 1일 오픈 예정</p>
               </div>
             </div>
           </div>

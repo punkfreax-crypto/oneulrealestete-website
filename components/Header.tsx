@@ -78,6 +78,9 @@ export default function Header() {
               }
             }}
             style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
               fontSize: 17,
               fontWeight: 500,
               letterSpacing: "-0.02em",
@@ -87,6 +90,13 @@ export default function Header() {
               whiteSpace: "nowrap",
             }}
           >
+            <img
+              src="/images/logo-mark.png"
+              alt="오늘부동산 로고"
+              width={26}
+              height={26}
+              style={{ display: "block", flexShrink: 0 }}
+            />
             오늘부동산 중개법인
           </Link>
 

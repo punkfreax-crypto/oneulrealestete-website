@@ -57,7 +57,7 @@ export default function AboutSection() {
                 lineHeight: 1.25,
               }}
             >
-              한 팀이 움직일 때,<br />거래가 달라집니다.
+              하지만 오늘 꼭 결정하지<br />않아도 됩니다.
             </h2>
           </div>
         </ScrollReveal>
@@ -74,8 +74,8 @@ export default function AboutSection() {
                 marginBottom: 16,
               }}
             >
-              오늘부동산은 도봉구에 뿌리를 두고 분당까지 영역을 넓혀왔습니다.
-              분야별 전문가들이 한 팀으로 움직이며, 거래의 처음부터 끝까지 함께합니다.
+              부동산 거래는 삶에서 손꼽히는 큰 결정입니다. 큰돈이 오가고, 한번
+              정하면 되돌리기 어렵습니다.
             </p>
             <p
               style={{
@@ -86,8 +86,8 @@ export default function AboutSection() {
                 marginBottom: 40,
               }}
             >
-              매매·전세·월세 모든 거래에서 의뢰인의 편에 섭니다.
-              숫자보다 사람을, 속도보다 정확함을 먼저 생각하는 투명하고 정직한 거래 문화를 만들어 나갑니다.
+              충분히 고민하고 결정하세요.
+              저희는 그 결정을 돕는 사람들입니다.
             </p>
             <Link
               href="/about"

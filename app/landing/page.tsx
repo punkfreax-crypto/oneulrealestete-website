@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import LandingForm from "@/components/sections/LandingForm";
 
 export const metadata: Metadata = {
-  title: "오늘부동산 | 원하는 매물 리스트 30초 신청",
-  description: "조건 입력하고 30초 만에 원하는 매물 리스트 받아보세요. 오늘부동산중개법인.",
+  title: "오늘부동산 | 조건에 맞는 매물, 정확하게 찾아드립니다",
+  description: "조건을 남겨주시면 오늘부동산중개법인이 정확하게 찾아드립니다.",
   robots: { index: false, follow: false },
 };
 

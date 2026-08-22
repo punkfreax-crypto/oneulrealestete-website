@@ -7,7 +7,7 @@ const MILESTONES = [
   { year: "2023", label: "도봉구 개업" },
   { year: "2024", label: "분당점 오픈" },
   { year: "2025", label: "상표등록 출원" },
-  { year: "2026", label: "법인 전환", current: true },
+  { year: "2026", label: "법인 전환 · 광교점 오픈", current: true },
 ];
 
 export default function AboutSection() {

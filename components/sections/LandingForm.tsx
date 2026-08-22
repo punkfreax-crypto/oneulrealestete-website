@@ -11,10 +11,12 @@ const AREAS = ["도봉구", "노원구", "강북구", "성북구", "수원 광�
 const MOVE_IN_OPTIONS = ["최대한 빨리", "정해진 날짜가 있어요", "정해진 날짜가 없어요", "날짜는 상관없어요"];
 const BUDGET_RANGES = ["5천만원 이하", "5000-2억원", "2-5억원", "5-9억원", "9억원 이상"];
 
+const HEADLINE = "조건에 맞는 매물, 정확하게 찾아드립니다";
+
 const HEADLINES: Record<string, { title: string; propertyType: PropertyType }> = {
-  apt: { title: "원하는 아파트 매물 리스트, 30초면 받습니다", propertyType: "아파트" },
-  store: { title: "조건에 맞는 상가·사무실, 30초면 받습니다", propertyType: "상가" },
-  room: { title: "원하는 자취방 리스트, 30초면 받습니다", propertyType: "원룸 / 투룸" },
+  apt: { title: HEADLINE, propertyType: "아파트" },
+  store: { title: HEADLINE, propertyType: "상가" },
+  room: { title: HEADLINE, propertyType: "원룸 / 투룸" },
 };
 
 function formatPhone(value: string) {
@@ -54,7 +56,7 @@ function LandingFormInner() {
       return;
     }
     if (!name.trim()) {
-      setFormError("이름을 입력해주세요.");
+      setFormError("성함을 입력해주세요.");
       return;
     }
     if (!/^01[0-9]-?\d{3,4}-?\d{4}$/.test(phone)) {
@@ -98,8 +100,8 @@ function LandingFormInner() {
       <div style={wrap}>
         <div style={{ ...card, textAlign: "center" as const }}>
           <p style={{ fontSize: 40, marginBottom: 16 }}>✅</p>
-          <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>신청이 접수됐어요</h1>
-          <p style={{ color: "#666" }}>확인 후 빠르게 연락드리겠습니다.</p>
+          <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>접수 완료</h1>
+          <p style={{ color: "#666" }}>빠르게 연락드리겠습니다.</p>
         </div>
       </div>
     );
@@ -111,11 +113,14 @@ function LandingFormInner() {
         <h1 style={{ fontSize: 22, fontWeight: 800, marginBottom: 4, lineHeight: 1.4 }}>
           {headline.title}
         </h1>
-        <p style={{ color: "#888", fontSize: 14, marginBottom: 24 }}>
-          오늘부동산중개법인 · 조건만 남겨주시면 딱 맞는 매물만 골라드려요
+        <p style={{ color: "#888", fontSize: 14, marginBottom: 12 }}>
+          오늘부동산중개법인
+        </p>
+        <p style={{ color: "#F39800", fontSize: 12.5, fontWeight: 700, marginBottom: 24 }}>
+          가리고 팔지 않습니다 · 구독자가 증인입니다
         </p>
 
-        <Field label="매물유형">
+        <Field label="유형">
           <div style={radioRow}>
             {(["아파트", "오피스텔", "원룸 / 투룸", "상가", "사무실", "기타"] as PropertyType[]).map((v) => (
               <RadioChip key={v} label={v} checked={propertyType === v} onClick={() => setPropertyType(v)} />
@@ -123,7 +128,7 @@ function LandingFormInner() {
           </div>
         </Field>
 
-        <Field label="거래유형">
+        <Field label="거래방식">
           <div style={radioRow}>
             {(["매매", "전세", "월세"] as DealType[]).map((v) => (
               <RadioChip key={v} label={v} checked={dealType === v} onClick={() => setDealType(v)} />
@@ -133,7 +138,7 @@ function LandingFormInner() {
 
         <Field label="지역">
           <select value={area} onChange={(e) => setArea(e.target.value)} style={input}>
-            <option value="">-지역 선택-</option>
+            <option value="">-지역-</option>
             {AREAS.map((a) => (
               <option key={a} value={a}>
                 {a}
@@ -170,7 +175,7 @@ function LandingFormInner() {
             </div>
           ) : (
             <select value={budgetRange} onChange={(e) => setBudgetRange(e.target.value)} style={input}>
-              <option value="">-예산 선택-</option>
+              <option value="">-예산-</option>
               {BUDGET_RANGES.map((b) => (
                 <option key={b} value={b}>
                   {b}
@@ -180,9 +185,9 @@ function LandingFormInner() {
           )}
         </Field>
 
-        <Field label="이사시기">
+        <Field label="입주 시기">
           <select value={moveIn} onChange={(e) => setMoveIn(e.target.value)} style={input}>
-            <option value="">-이사시기 선택-</option>
+            <option value="">-입주 시기-</option>
             {MOVE_IN_OPTIONS.map((m) => (
               <option key={m} value={m}>
                 {m}
@@ -191,11 +196,11 @@ function LandingFormInner() {
           </select>
         </Field>
 
-        <Field label="이름 *">
+        <Field label="성함">
           <input value={name} onChange={(e) => setName(e.target.value)} style={input} />
         </Field>
 
-        <Field label="연락처 *">
+        <Field label="연락처">
           <input
             value={phone}
             onChange={(e) => setPhone(formatPhone(e.target.value))}
@@ -205,7 +210,7 @@ function LandingFormInner() {
           />
         </Field>
 
-        <Field label="기타 전달내용 (선택)">
+        <Field label="메모 (선택)">
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -220,17 +225,17 @@ function LandingFormInner() {
           </p>
         )}
         <button type="submit" disabled={status === "sending"} style={submitBtn}>
-          {status === "sending" ? "전송 중..." : "신청하기"}
+          {status === "sending" ? "전송 중" : "매물 받기"}
         </button>
         {status === "error" && (
           <p style={{ color: "#c0392b", fontSize: 13, marginTop: 8, textAlign: "center" }}>
-            전송에 실패했어요. 아래 연락처로 바로 문의해주세요.
+            전송에 실패했습니다. 아래 연락처로 문의해주세요.
           </p>
         )}
 
         <div style={footer}>
-          <p style={{ fontWeight: 700, marginBottom: 4 }}>글쓰기 귀찮으신 분</p>
-          <p>전화 02-956-5030 · 카카오톡 상담</p>
+          <p style={{ fontWeight: 700, marginBottom: 4 }}>전화 상담</p>
+          <p>02-956-5030 · 카카오톡 상담</p>
           <p style={{ marginTop: 12, color: "#999", fontSize: 12 }}>
             오늘부동산중개법인(주) · 서울 도봉구 도봉로180나길 41 상가1동 224호
           </p>

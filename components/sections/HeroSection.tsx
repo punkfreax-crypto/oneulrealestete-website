@@ -194,7 +194,7 @@ export default function HeroSection() {
               fontWeight: 400,
             }}
           >
-            SINCE 2023 · 도봉 · 분당
+            SINCE 2023 · 도봉 · 분당 · 광교
           </p>
         </div>
 

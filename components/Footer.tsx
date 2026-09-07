@@ -73,10 +73,8 @@ export default function Footer() {
                 <a href="tel:031-701-4333" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", textDecoration: "none" }}>031-701-4333</a>
               </div>
               <div>
-                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 4 }}>
-                  광교점
-                </p>
-                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>2026년 9월 1일 오픈 예정</p>
+                <p style={{ fontSize: 13, color: "#F39800", marginBottom: 4 }}>광교점</p>
+                <a href="tel:031-307-5703" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", textDecoration: "none" }}>031-307-5703</a>
               </div>
             </div>
           </div>

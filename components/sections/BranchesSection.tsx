@@ -22,11 +22,11 @@ const branches = [
   },
   {
     name: "광교점",
-    status: "2026년 9월 1일 오픈 예정",
-    address: "경기도 수원시 영통구 광교\n(위치 확인 중)",
-    phone: "—",
-    hours: "—",
-    soon: true,
+    status: "운영 중",
+    address: "경기도 수원시 영통구 광교호수공원로 277\nB1 143호",
+    phone: "031-307-5703",
+    hours: "평일 08:00 – 19:00",
+    soon: false,
   },
 ];
 

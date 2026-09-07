@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "오늘부동산 중개법인 | 내일을 여는 부동산",
   description:
     "오늘의 선택이 내일의 가치를 만듭니다. 도봉구 전문 오늘부동산중개법인입니다. 매매·전세·월세 주거용 상업용 부동산 거래를 책임집니다.",
-  keywords: "오늘부동산, 부동산 중개법인, 도봉구 부동산, 공인중개사, 부동산 컨설팅, 분당 부동산, 수유 부동산, 전세, 매매, 부동산 상담",
+  keywords: "오늘부동산, 부동산 중개법인, 도봉구 부동산, 공인중개사, 부동산 컨설팅, 분당 부동산, 광교 부동산, 수원 영통구 부동산, 수유 부동산, 전세, 매매, 부동산 상담",
   metadataBase: new URL("https://www.oneulrealestateagent.com"),
   alternates: {
     canonical: "/",

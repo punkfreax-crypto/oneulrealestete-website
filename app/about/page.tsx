@@ -55,6 +55,13 @@ const OFFICES = [
     tel: "031-701-4333",
     hours: "평일 08:00 – 19:00",
   },
+  {
+    label: "오늘부동산",
+    name: "광교점",
+    address: "경기도 수원시 영통구 광교호수공원로 277\nB1 143호",
+    tel: "031-307-5703",
+    hours: "평일 08:00 – 19:00",
+  },
 ];
 
 export default function AboutPage() {
@@ -122,7 +129,7 @@ export default function AboutPage() {
               letterSpacing: "0.08em",
             }}
           >
-            SINCE 2023 · 도봉 · 분당
+            SINCE 2023 · 도봉 · 분당 · 광교
           </p>
         </div>
       </section>
@@ -696,7 +703,7 @@ export default function AboutPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
+              gridTemplateColumns: "repeat(3, 1fr)",
               gap: 24,
             }}
             className="offices-grid"

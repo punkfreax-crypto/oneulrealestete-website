@@ -107,6 +107,12 @@ export default function CtaSection() {
               </a>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <Phone size={14} color="rgba(255,255,255,0.6)" />
+              <a href="tel:031-307-5703" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", textDecoration: "none" }}>
+                031-307-5703 (광교점)
+              </a>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <Mail size={14} color="rgba(255,255,255,0.6)" />
               <a href="mailto:punkfreax@naver.com" style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", textDecoration: "none" }}>
                 punkfreax@naver.com

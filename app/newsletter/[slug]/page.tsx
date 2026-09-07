@@ -3,15 +3,17 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getNewsletterArticle, getNewsletterList } from "@/lib/newsletter";
+import { getNewsletterArticle } from "@/lib/newsletter";
+
+export const dynamic = "force-dynamic";
 
 interface Props {
-  params: Promise<{ date: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { date } = await params;
-  const article = getNewsletterArticle(date);
+  const { slug } = await params;
+  const article = await getNewsletterArticle(slug);
   if (!article) return { title: "뉴스레터 | 오늘부동산" };
   return {
     title: `${article.title} | 오늘부동산 뉴스레터`,
@@ -19,20 +21,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export function generateStaticParams() {
-  return getNewsletterList().map((a) => ({ date: a.slug }));
-}
-
-function formatDate(dateStr: string) {
-  const [y, m, d] = dateStr.split("-");
+function formatDate(iso: string | null) {
+  if (!iso) return "";
+  const dt = new Date(iso);
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth() + 1).padStart(2, "0");
+  const d = String(dt.getDate()).padStart(2, "0");
   const days = ["일", "월", "화", "수", "목", "금", "토"];
-  const dt = new Date(Number(y), Number(m) - 1, Number(d));
   return `${y}년 ${m}월 ${d}일 ${days[dt.getDay()]}요일`;
 }
 
 export default async function ArticlePage({ params }: Props) {
-  const { date } = await params;
-  const article = getNewsletterArticle(date);
+  const { slug } = await params;
+  const article = await getNewsletterArticle(slug);
   if (!article) notFound();
 
   return (
@@ -62,7 +63,7 @@ export default async function ArticlePage({ params }: Props) {
               marginBottom: 20,
             }}
           >
-            {formatDate(article.date)}
+            {formatDate(article.published_at)}
           </p>
           <h1
             style={{
@@ -89,7 +90,7 @@ export default async function ArticlePage({ params }: Props) {
         <div
           style={{ maxWidth: 800, margin: "0 auto" }}
           className="article-body"
-          dangerouslySetInnerHTML={{ __html: article.htmlContent }}
+          dangerouslySetInnerHTML={{ __html: article.html }}
         />
       </section>
 

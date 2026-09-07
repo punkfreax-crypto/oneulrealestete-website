@@ -11,15 +11,20 @@ export const metadata: Metadata = {
     "도봉구·노원구 부동산 시장 동향을 전덕재 대표의 시각으로 정리한 칼럼입니다.",
 };
 
-function formatDate(dateStr: string) {
-  const [y, m, d] = dateStr.split("-");
+export const dynamic = "force-dynamic";
+
+function formatDate(iso: string | null) {
+  if (!iso) return { label: "", short: "" };
+  const dt = new Date(iso);
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth() + 1).padStart(2, "0");
+  const d = String(dt.getDate()).padStart(2, "0");
   const days = ["일", "월", "화", "수", "목", "금", "토"];
-  const dt = new Date(Number(y), Number(m) - 1, Number(d));
   return { label: `${y}년 ${m}월 ${d}일 ${days[dt.getDay()]}요일`, short: `${y}.${m}.${d}` };
 }
 
-export default function NewsletterPage() {
-  const articles = getNewsletterList();
+export default async function NewsletterPage() {
+  const articles = await getNewsletterList();
 
   return (
     <>
@@ -117,7 +122,7 @@ export default function NewsletterPage() {
               className="nl-grid"
             >
               {articles.map((article, i) => {
-                const { label, short } = formatDate(article.date);
+                const { label, short } = formatDate(article.published_at);
                 return (
                   <ScrollReveal key={article.slug} delay={i * 80}>
                     <Link

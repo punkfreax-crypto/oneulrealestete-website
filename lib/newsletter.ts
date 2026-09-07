@@ -1,79 +1,54 @@
-import fs from "fs";
-import path from "path";
+import { createClient } from "@supabase/supabase-js";
+import { marked } from "marked";
 
-const OUTPUT_DIR = "/Users/dukjae/content-system/output";
+// 공개 뉴스레터 데이터 소스: Supabase (newsletter_posts 테이블)
+// 관리자가 발행한 글만 노출된다. 환경변수가 없으면 빈 목록을 반환(빌드 안전).
 
 export interface NewsletterMeta {
-  date: string;
+  slug: string;
   title: string;
   excerpt: string;
-  slug: string;
+  cover_image: string;
+  published_at: string | null;
 }
 
 export interface NewsletterArticle extends NewsletterMeta {
-  htmlContent: string;
+  body: string;
+  html: string;
+  views: number;
 }
 
-function extractTitle(html: string): string {
-  const m = html.match(/<title>([^<]+)<\/title>/i);
-  return m ? m[1].trim() : "오늘의 부동산 이야기";
+function publicClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, { auth: { persistSession: false } });
 }
 
-function extractExcerpt(html: string): string {
-  const matches = html.match(/<p[^>]*>([\s\S]*?)<\/p>/gi);
-  if (!matches) return "";
-  for (const p of matches) {
-    const text = p.replace(/<[^>]+>/g, "").trim();
-    if (text.length > 20) return text.slice(0, 120) + (text.length > 120 ? "…" : "");
-  }
-  return "";
+export async function getNewsletterList(): Promise<NewsletterMeta[]> {
+  const sb = publicClient();
+  if (!sb) return [];
+  const { data, error } = await sb
+    .from("newsletter_posts")
+    .select("slug,title,excerpt,cover_image,published_at")
+    .eq("status", "published")
+    .order("published_at", { ascending: false });
+  if (error || !data) return [];
+  return data as NewsletterMeta[];
 }
 
-function extractBodyContent(html: string): string {
-  const m = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-  return m ? m[1].trim() : html;
-}
-
-export function getNewsletterList(): NewsletterMeta[] {
-  if (!fs.existsSync(OUTPUT_DIR)) return [];
-
-  const dirs = fs
-    .readdirSync(OUTPUT_DIR)
-    .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d))
-    .sort()
-    .reverse();
-
-  const articles: NewsletterMeta[] = [];
-  for (const date of dirs) {
-    const blogDir = path.join(OUTPUT_DIR, date, "blog");
-    if (!fs.existsSync(blogDir)) continue;
-    const htmlFiles = fs.readdirSync(blogDir).filter((f) => f.endsWith(".html"));
-    for (const file of htmlFiles) {
-      const html = fs.readFileSync(path.join(blogDir, file), "utf-8");
-      articles.push({
-        date,
-        slug: date,
-        title: extractTitle(html),
-        excerpt: extractExcerpt(html),
-      });
-    }
-  }
-  return articles;
-}
-
-export function getNewsletterArticle(date: string): NewsletterArticle | null {
-  const blogDir = path.join(OUTPUT_DIR, date, "blog");
-  if (!fs.existsSync(blogDir)) return null;
-
-  const htmlFiles = fs.readdirSync(blogDir).filter((f) => f.endsWith(".html"));
-  if (htmlFiles.length === 0) return null;
-
-  const html = fs.readFileSync(path.join(blogDir, htmlFiles[0]), "utf-8");
-  return {
-    date,
-    slug: date,
-    title: extractTitle(html),
-    excerpt: extractExcerpt(html),
-    htmlContent: extractBodyContent(html),
-  };
+export async function getNewsletterArticle(
+  slug: string
+): Promise<NewsletterArticle | null> {
+  const sb = publicClient();
+  if (!sb) return null;
+  const { data } = await sb
+    .from("newsletter_posts")
+    .select("slug,title,excerpt,cover_image,published_at,body,views")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .maybeSingle();
+  if (!data) return null;
+  const html = await marked.parse(data.body || "");
+  return { ...(data as Omit<NewsletterArticle, "html">), html };
 }

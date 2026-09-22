@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import StructuredData from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "오늘부동산 중개법인 | 내일을 여는 부동산",
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
+    google: "oYm7tHNrxbhX2VhL2piownmBBFNgv7tFV8Yo5lWwDmU",
     other: {
       "naver-site-verification": "002fdeae00e69f82cc0b807c33e2fc136e004ff8",
     },
@@ -51,7 +53,10 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <StructuredData />
+        {children}
+      </body>
     </html>
   );
 }
